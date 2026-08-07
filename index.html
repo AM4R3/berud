@@ -443,34 +443,68 @@ footer {
 @media (max-width: 1024px) {
   .nav-links, nav .btn { display: none; }
   .nav-hamburger { display: flex; }
-  nav { padding: 20px 24px; }
-  nav.scrolled { padding: 14px 24px; }
+  nav { padding: 18px 20px; }
+  nav.scrolled { padding: 14px 20px; }
 
   #hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-text { padding: 120px 24px 60px; }
-  .hero-visual { min-height: 55vw; }
-  .hero-badge { left: 24px; bottom: -20px; }
+  .hero-text { padding: 90px 20px 36px; }
+  .hero-visual { min-height: 70vw; }
+  .hero-badge { left: 20px; bottom: 20px; }
 
-  .section { padding: 72px 24px; }
+  .section { padding: 60px 20px; }
 
-  #pecas .product-grid {
-    grid-template-columns: 1fr;
-  }
-  .product-card--main { grid-row: span 1; min-height: 420px; }
-  .product-card--a, .product-card--b { min-height: 220px; }
+  #pecas .product-grid { grid-template-columns: 1fr; }
+  .product-card--main { grid-row: span 1; min-height: 400px; }
+  .product-card--a, .product-card--b { min-height: 260px; }
 
-  #sobre .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
-  .sobre-visual { min-height: 320px; }
+  #sobre .sobre-grid { grid-template-columns: 1fr; gap: 32px; }
+  .sobre-visual { min-height: 300px; }
 
   #mais-pecas .mini-grid { grid-template-columns: 1fr; }
+  .mini-card { min-height: 280px; }
 
   .dif-grid { grid-template-columns: 1fr; gap: 0; }
+  .dif-item { padding: 24px 0; }
 
   #depoimentos .dep-grid { grid-template-columns: 1fr; }
 
-  footer { padding: 48px 24px 24px; }
-  .footer-top { flex-direction: column; }
-  .footer-links { flex-wrap: wrap; }
+  footer { padding: 44px 20px 24px; }
+  .footer-top { flex-direction: column; gap: 24px; }
+  .footer-links { flex-wrap: wrap; gap: 16px 20px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 16px 20px; }
+
+  .hero-text { padding: 80px 20px 28px; gap: 18px; }
+  .hero-visual { min-height: 85vw; }
+  .hero-badge { font-size: 12px; padding: 10px 16px; }
+  .hero-sub { font-size: 15px; }
+  .hero-ctas { flex-direction: column; gap: 10px; }
+  .hero-ctas .btn { width: 100%; justify-content: center; text-align: center; }
+
+  .section { padding: 52px 20px; }
+  .section-header { margin-bottom: 36px; }
+
+  .product-card--main { min-height: 360px; }
+  .product-card--a, .product-card--b { min-height: 240px; }
+  .product-name { font-size: 19px; }
+  .product-card-inner { padding: 20px; }
+
+  .sobre-visual { min-height: 260px; }
+  .sobre-quote { font-size: clamp(20px, 5.5vw, 28px); }
+
+  .mini-card { min-height: 260px; }
+
+  .dep-card { padding: 24px 20px; }
+
+  .dif-title { font-size: 18px; }
+  .dif-body { font-size: 13px; }
+
+  footer { padding: 40px 20px 20px; }
+  .footer-logo { font-size: 22px; }
+  .footer-links { flex-direction: column; gap: 10px; }
 }
 </style>
 </head>
