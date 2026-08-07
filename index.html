@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BERUD | Handmade Collection — Crochê Artesanal</title>
+<meta name="description" content="Crochê artesanal feito à mão — biquínis, saídas de praia e acessórios únicos. Sem igual, do jeito que você quer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --c-primary:   #1C1410;
+  --c-secondary: #C4886A;
+  --c-cta:       #D4735E;
+  --c-bg:        #FAF6F0;
+  --c-surface:   #F0E8DC;
+  --c-muted:     #7A6558;
+  --c-white:     #FFFFFF;
+  --font-head:   'Geist', 'DM Sans', sans-serif;
+  --font-body:   'DM Sans', sans-serif;
+  --radius:      4px;
+  --transition:  0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--c-bg);
+  color: var(--c-primary);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── GEIST VIA @font-face (system fallback) ─────────── */
+@font-face {
+  font-family: 'Geist';
+  src: local('GeistBlack'), local('Geist Black'), local('Geist-Black');
+  font-weight: 900;
+}
+
+/* ── CROCHET SVG PATTERN OVERLAY ─────────────────────── */
+.crochet-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cellipse cx='30' cy='26' rx='12' ry='8' fill='none' stroke='%231C1410' stroke-width='1.2'/%3E%3Cellipse cx='0' cy='0' rx='12' ry='8' fill='none' stroke='%231C1410' stroke-width='1.2'/%3E%3Cellipse cx='60' cy='0' rx='12' ry='8' fill='none' stroke='%231C1410' stroke-width='1.2'/%3E%3Cellipse cx='0' cy='52' rx='12' ry='8' fill='none' stroke='%231C1410' stroke-width='1.2'/%3E%3Cellipse cx='60' cy='52' rx='12' ry='8' fill='none' stroke='%231C1410' stroke-width='1.2'/%3E%3Cellipse cx='15' cy='13' rx='8' ry='5' fill='none' stroke='%231C1410' stroke-width='0.8' opacity='0.5'/%3E%3Cellipse cx='45' cy='39' rx='8' ry='5' fill='none' stroke='%231C1410' stroke-width='0.8' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 60px 52px;
+  opacity: 0.04;
+}
+.crochet-overlay--light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cellipse cx='30' cy='26' rx='12' ry='8' fill='none' stroke='%23FAF6F0' stroke-width='1.2'/%3E%3Cellipse cx='0' cy='0' rx='12' ry='8' fill='none' stroke='%23FAF6F0' stroke-width='1.2'/%3E%3Cellipse cx='60' cy='0' rx='12' ry='8' fill='none' stroke='%23FAF6F0' stroke-width='1.2'/%3E%3Cellipse cx='0' cy='52' rx='12' ry='8' fill='none' stroke='%23FAF6F0' stroke-width='1.2'/%3E%3Cellipse cx='60' cy='52' rx='12' ry='8' fill='none' stroke='%23FAF6F0' stroke-width='1.2'/%3E%3C/svg%3E");
+  opacity: 0.06;
+}
+
+/* ── TYPOGRAPHY ───────────────────────────────────────── */
+.t-hero-bold {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(44px, 6vw, 80px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--c-primary);
+}
+.t-hero-light {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(20px, 2.8vw, 36px);
+  line-height: 1.3;
+  color: var(--c-muted);
+}
+.t-section-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--c-primary);
+}
+.t-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.t-body { font-size: 15px; font-weight: 300; color: var(--c-muted); line-height: 1.7; }
+
+/* ── BUTTONS ──────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 14px; letter-spacing: 0.04em;
+  padding: 14px 28px; border-radius: var(--radius);
+  text-decoration: none; cursor: pointer;
+  transition: all var(--transition);
+  border: none; white-space: nowrap;
+}
+.btn-coral {
+  background: var(--c-cta); color: var(--c-white);
+}
+.btn-coral:hover { background: #C4604A; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(212,115,94,0.35); }
+.btn-ghost {
+  background: transparent; color: var(--c-primary);
+  border: 1.5px solid var(--c-primary);
+}
+.btn-ghost:hover { background: var(--c-primary); color: var(--c-white); }
+.btn-ghost--light {
+  background: transparent; color: var(--c-white);
+  border: 1.5px solid rgba(255,255,255,0.5);
+}
+.btn-ghost--light:hover { background: rgba(255,255,255,0.12); }
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all var(--transition);
+}
+nav.scrolled {
+  background: var(--c-bg); padding: 14px 48px;
+  box-shadow: 0 1px 0 rgba(28,20,16,0.08);
+}
+.nav-logo {
+  display: flex; flex-direction: column; gap: 1px;
+  text-decoration: none;
+}
+.nav-logo-name {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 22px; letter-spacing: 0.18em;
+  color: var(--c-primary); line-height: 1;
+}
+.nav-logo-tag {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--c-muted);
+}
+nav.scrolled .nav-logo-name { color: var(--c-primary); }
+.nav-links {
+  display: flex; align-items: center; gap: 36px; list-style: none;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 400; letter-spacing: 0.06em;
+  color: var(--c-primary); text-decoration: none;
+  opacity: 0.7; transition: opacity var(--transition);
+}
+.nav-links a:hover { opacity: 1; }
+nav:not(.scrolled) .nav-links a { color: var(--c-primary); }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--c-primary); transition: all var(--transition);
+}
+
+/* ── HERO ─────────────────────────────────────────────── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  overflow: hidden;
+}
+.hero-text {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 140px 48px 80px 48px;
+  gap: 24px;
+}
+.hero-headline { display: flex; flex-direction: column; gap: 4px; }
+.hero-sub {
+  max-width: 400px;
+  font-size: 16px; font-weight: 300; color: var(--c-muted); line-height: 1.65;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-visual {
+  position: relative;
+  /* SUBSTITUIR: foto editorial produto em uso (praia/areia) 1920×1080px */
+  background: linear-gradient(160deg, #C4886A 0%, #D4956A 35%, #E8C49A 65%, #F5E0C8 100%);
+  min-height: 100vh;
+}
+.hero-badge {
+  position: absolute; bottom: 48px; left: -24px; z-index: 3;
+  background: var(--c-bg); color: var(--c-primary);
+  padding: 12px 20px; border-radius: 100px;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+  box-shadow: 0 8px 32px rgba(28,20,16,0.12);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── SECTION WRAPPER ──────────────────────────────────── */
+.section { padding: 100px 48px; position: relative; }
+.section--surface { background: var(--c-surface); }
+.section--dark { background: var(--c-primary); }
+.section-header { margin-bottom: 56px; }
+.section-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.eyebrow-line {
+  display: block; width: 32px; height: 1px; background: var(--c-cta);
+}
+
+/* ── PRODUCTS GRID ────────────────────────────────────── */
+#pecas .product-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: auto;
+  gap: 20px;
+}
+.product-card {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  cursor: pointer; transition: transform var(--transition), box-shadow var(--transition);
+}
+.product-card:hover { transform: scale(1.015); box-shadow: 0 20px 60px rgba(28,20,16,0.15); }
+.product-card--main {
+  /* SUBSTITUIR: foto do produto principal em destaque 800×960px */
+  background: linear-gradient(145deg, #1C1410 0%, #3D2B1F 50%, #5C3D2A 100%);
+  min-height: 560px;
+  grid-row: span 2;
+}
+.product-card--a {
+  /* SUBSTITUIR: foto produto secundário 800×800px */
+  background: linear-gradient(145deg, #C4886A 0%, #D4A87C 100%);
+  min-height: 265px;
+}
+.product-card--b {
+  /* SUBSTITUIR: foto produto secundário 800×800px */
+  background: linear-gradient(145deg, #2A1C12 0%, #8B5E3C 100%);
+  min-height: 265px;
+}
+.product-card-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 28px;
+  background: linear-gradient(to top, rgba(28,20,16,0.7) 0%, transparent 55%);
+}
+.product-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(250,246,240,0.15); backdrop-filter: blur(8px);
+  color: var(--c-white); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 14px; width: fit-content;
+}
+.product-tag--highlight { background: var(--c-cta); border-color: transparent; }
+.product-name {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 22px; color: var(--c-white);
+  line-height: 1.2; margin-bottom: 18px;
+}
+.product-name--sm { font-size: 17px; margin-bottom: 12px; }
+.product-cta {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+  color: var(--c-white); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  opacity: 0.85; transition: opacity var(--transition);
+  border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px;
+  width: fit-content;
+}
+.product-cta:hover { opacity: 1; }
+
+/* ── SOBRE ────────────────────────────────────────────── */
+#sobre .sobre-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.sobre-text { display: flex; flex-direction: column; gap: 24px; }
+.sobre-quote {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: clamp(24px, 3vw, 36px); line-height: 1.25;
+  color: var(--c-primary); letter-spacing: -0.01em;
+}
+.sobre-sub { font-size: 16px; color: var(--c-muted); line-height: 1.7; }
+.sobre-bullets {
+  display: flex; flex-direction: column; gap: 10px; list-style: none;
+}
+.sobre-bullets li {
+  font-size: 14px; font-weight: 400; color: var(--c-primary);
+  display: flex; align-items: center; gap: 10px;
+}
+.sobre-bullets li::before {
+  content: ''; display: block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--c-cta); flex-shrink: 0;
+}
+.sobre-visual {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  min-height: 500px;
+  /* SUBSTITUIR: foto da criadora com as peças 600×800px */
+  background: linear-gradient(160deg, #E8C49A 0%, #C4886A 50%, #8B5E3C 100%);
+}
+.sobre-visual-label {
+  position: absolute; bottom: 24px; left: 24px;
+  background: var(--c-bg); padding: 10px 16px; border-radius: var(--radius);
+  font-size: 12px; font-weight: 500; color: var(--c-primary);
+  letter-spacing: 0.06em;
+}
+
+/* ── MAIS PEÇAS GRID ──────────────────────────────────── */
+#mais-pecas .mini-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.mini-card {
+  border-radius: var(--radius); overflow: hidden; position: relative;
+  min-height: 300px; cursor: pointer;
+  transition: transform var(--transition);
+}
+.mini-card:hover { transform: scale(1.012); }
+.mini-card--1 { background: linear-gradient(145deg, #C4886A 0%, #E8B896 100%); }
+.mini-card--2 { background: linear-gradient(145deg, #1C1410 0%, #4A3020 100%); }
+.mini-card--3 { background: linear-gradient(145deg, #8B5E3C 0%, #C4886A 100%); }
+.mini-card--4 { background: linear-gradient(145deg, #3D2B1F 0%, #7A5540 100%); }
+.mini-card-inner {
+  position: absolute; inset: 0; padding: 24px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: linear-gradient(to top, rgba(28,20,16,0.65) 0%, transparent 60%);
+}
+.mini-cat {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+.mini-name {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 18px; color: var(--c-white); margin-bottom: 12px;
+}
+.mini-link {
+  font-size: 12px; font-weight: 500; color: var(--c-white);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  opacity: 0.8; transition: opacity var(--transition);
+  letter-spacing: 0.04em;
+}
+.mini-link:hover { opacity: 1; }
+.mini-link::after { content: '→'; }
+
+/* ── DIFERENCIAIS ─────────────────────────────────────── */
+#diferenciais {
+  position: relative; overflow: hidden;
+}
+.dif-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+  position: relative; z-index: 2;
+}
+.dif-item { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+.dif-title {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 20px; color: var(--c-white); margin-bottom: 12px;
+  line-height: 1.25;
+}
+.dif-title span { color: var(--c-cta); }
+.dif-body { font-size: 14px; color: rgba(250,246,240,0.55); line-height: 1.65; }
+
+/* ── DEPOIMENTOS ──────────────────────────────────────── */
+#depoimentos .dep-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.dep-card {
+  background: var(--c-surface); border-radius: var(--radius);
+  padding: 32px 28px; display: flex; flex-direction: column; gap: 20px;
+  transition: box-shadow var(--transition);
+}
+.dep-card:hover { box-shadow: 0 12px 40px rgba(28,20,16,0.08); }
+.dep-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 18px; color: var(--c-white);
+  flex-shrink: 0;
+}
+.dep-header { display: flex; align-items: center; gap: 14px; }
+.dep-meta { display: flex; flex-direction: column; gap: 2px; }
+.dep-name { font-weight: 500; font-size: 14px; color: var(--c-primary); }
+.dep-loc { font-size: 12px; color: var(--c-muted); }
+.dep-stars { color: var(--c-cta); font-size: 13px; letter-spacing: 2px; }
+.dep-text { font-size: 14px; color: var(--c-muted); line-height: 1.7; font-style: italic; }
+.dep-text::before { content: '"'; }
+.dep-text::after { content: '"'; }
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer {
+  background: var(--c-primary); padding: 60px 48px 32px;
+  display: flex; flex-direction: column; gap: 40px;
+}
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 40px;
+}
+.footer-brand { display: flex; flex-direction: column; gap: 10px; }
+.footer-logo {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 28px; letter-spacing: 0.2em; color: var(--c-white);
+}
+.footer-tagline { font-size: 13px; color: rgba(250,246,240,0.4); letter-spacing: 0.06em; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a {
+  font-size: 13px; color: rgba(250,246,240,0.5);
+  text-decoration: none; transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--c-white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 12px; color: rgba(250,246,240,0.3); }
+.footer-ig {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: rgba(250,246,240,0.5);
+  text-decoration: none; transition: color var(--transition);
+}
+.footer-ig:hover { color: var(--c-white); }
+.footer-ig::before {
+  content: '';
+  width: 16px; height: 16px;
+  background: rgba(250,246,240,0.3); border-radius: 4px;
+  display: block;
+}
+
+/* ── MOBILE NAV DRAWER ────────────────────────────────── */
+.mobile-nav {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: var(--c-bg);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 32px; color: var(--c-primary); text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.mobile-nav-close {
+  position: absolute; top: 24px; right: 24px;
+  background: none; border: none; cursor: pointer;
+  font-size: 28px; color: var(--c-primary);
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .nav-links, nav .btn { display: none; }
+  .nav-hamburger { display: flex; }
+  nav { padding: 20px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-text { padding: 120px 24px 60px; }
+  .hero-visual { min-height: 55vw; }
+  .hero-badge { left: 24px; bottom: -20px; }
+
+  .section { padding: 72px 24px; }
+
+  #pecas .product-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-card--main { grid-row: span 1; min-height: 420px; }
+  .product-card--a, .product-card--b { min-height: 220px; }
+
+  #sobre .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sobre-visual { min-height: 320px; }
+
+  #mais-pecas .mini-grid { grid-template-columns: 1fr; }
+
+  .dif-grid { grid-template-columns: 1fr; gap: 0; }
+
+  #depoimentos .dep-grid { grid-template-columns: 1fr; }
+
+  footer { padding: 48px 24px 24px; }
+  .footer-top { flex-direction: column; }
+  .footer-links { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">BERUD</span>
+    <span class="nav-logo-tag">Handmade Collection</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#pecas">Peças</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="https://instagram.com/beruds__" target="_blank" rel="noopener">@beruds__</a></li>
+  </ul>
+  <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+uma+peça+de+crochê!+🧶" target="_blank" rel="noopener" class="btn btn-coral">Encomendar</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE NAV ─────────────────────────────────────── -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close" id="nav-close">✕</button>
+  <a href="#pecas" onclick="closeMobileNav()">Peças</a>
+  <a href="#sobre" onclick="closeMobileNav()">Sobre</a>
+  <a href="https://instagram.com/beruds__" target="_blank" rel="noopener">@beruds__</a>
+  <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+uma+peça+de+crochê!+🧶" target="_blank" rel="noopener" class="btn btn-coral" onclick="closeMobileNav()">Encomendar</a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-headline">
+      <span class="t-hero-bold">Aquela peça</span>
+      <span class="t-hero-light">que todo mundo para pra perguntar.</span>
+    </div>
+    <p class="hero-sub">Crochê artesanal feito à mão — sem igual, do jeito que você quer.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+uma+peça+de+crochê!+🧶" target="_blank" rel="noopener" class="btn btn-coral">🧶 Quero a minha peça</a>
+      <a href="#pecas" class="btn btn-ghost">Ver as peças</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <!-- SUBSTITUIR: foto editorial produto em uso (praia/areia) 1920×1080px -->
+    <div class="crochet-overlay"></div>
+    <div class="hero-badge">🧶 feito à mão</div>
+  </div>
+</section>
+
+<!-- ── PRODUTOS DESTAQUE ────────────────────────────────── -->
+<section class="section" id="pecas">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="t-label">Coleção</span>
+    </div>
+    <h2 class="t-section-title">As peças</h2>
+  </div>
+  <div class="product-grid">
+    <!-- CARD PRINCIPAL -->
+    <div class="product-card product-card--main">
+      <!-- SUBSTITUIR: foto do produto principal em destaque 800×960px -->
+      <div class="product-card-inner">
+        <span class="product-tag product-tag--highlight">✦ mais pedido</span>
+        <h3 class="product-name">Biquíni de crochê artesanal</h3>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+o+biquíni+de+crochê!+🧶" target="_blank" rel="noopener" class="product-cta">Quero essa →</a>
+      </div>
+    </div>
+    <!-- CARD A -->
+    <div class="product-card product-card--a">
+      <!-- SUBSTITUIR: foto produto secundário 800×800px -->
+      <div class="product-card-inner">
+        <span class="product-tag">novo</span>
+        <h3 class="product-name product-name--sm">Saída de praia crochê</h3>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+a+saída+de+praia!+🧶" target="_blank" rel="noopener" class="product-cta">Ver mais →</a>
+      </div>
+    </div>
+    <!-- CARD B -->
+    <div class="product-card product-card--b">
+      <!-- SUBSTITUIR: foto produto secundário 800×800px -->
+      <div class="product-card-inner">
+        <span class="product-tag">exclusivo</span>
+        <h3 class="product-name product-name--sm">Conjunto crochê</h3>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+o+conjunto+de+crochê!+🧶" target="_blank" rel="noopener" class="product-cta">Ver mais →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOBRE ────────────────────────────────────────────── -->
+<section class="section section--surface" id="sobre" style="position:relative;overflow:hidden;">
+  <div class="crochet-overlay"></div>
+  <div class="sobre-grid" style="position:relative;z-index:2;">
+    <div class="sobre-text">
+      <div class="section-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="t-label">A história</span>
+      </div>
+      <p class="sobre-quote">Cada peça nasce aqui. Nas mãos. Com o fio certo, a cor que você escolheu e o tamanho que serve em você.</p>
+      <p class="sobre-sub">A BERUD surgiu porque eu não achava no mercado o que eu queria usar na praia. Então comecei a fazer. Hoje cada encomenda é única — escolha a cor, o modelo, o seu.</p>
+      <ul class="sobre-bullets">
+        <li>Feito à mão, ponto a ponto</li>
+        <li>Entrega para todo o Brasil</li>
+        <li>Personalizado do jeito que você quer</li>
+        <li>Cores e tamanhos sob medida</li>
+      </ul>
+      <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+saber+mais+sobre+as+peças!+🧶" target="_blank" rel="noopener" class="btn btn-coral" style="width:fit-content;">Fala comigo →</a>
+    </div>
+    <div class="sobre-visual">
+      <!-- SUBSTITUIR: foto da criadora com as peças 600×800px -->
+      <div class="sobre-visual-label">criado à mão ✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MAIS PEÇAS ────────────────────────────────────────── -->
+<section class="section" id="mais-pecas">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="t-label">Galeria</span>
+    </div>
+    <h2 class="t-section-title">Mais do nosso trabalho</h2>
+  </div>
+  <div class="mini-grid">
+    <div class="mini-card mini-card--1">
+      <!-- SUBSTITUIR: foto acessório crochê 600×400px -->
+      <div class="mini-card-inner">
+        <span class="mini-cat">Acessórios</span>
+        <p class="mini-name">Bolsa de crochê</p>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Quero+encomendar+uma+bolsa+de+crochê!+🧶" target="_blank" rel="noopener" class="mini-link">Encomendar essa</a>
+      </div>
+    </div>
+    <div class="mini-card mini-card--2">
+      <!-- SUBSTITUIR: foto top crochê 600×400px -->
+      <div class="mini-card-inner">
+        <span class="mini-cat">Tops</span>
+        <p class="mini-name">Top crochê personalizado</p>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Quero+encomendar+um+top+de+crochê!+🧶" target="_blank" rel="noopener" class="mini-link">Encomendar essa</a>
+      </div>
+    </div>
+    <div class="mini-card mini-card--3">
+      <!-- SUBSTITUIR: foto saia crochê 600×400px -->
+      <div class="mini-card-inner">
+        <span class="mini-cat">Saias</span>
+        <p class="mini-name">Saia de crochê</p>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Quero+encomendar+uma+saia+de+crochê!+🧶" target="_blank" rel="noopener" class="mini-link">Encomendar essa</a>
+      </div>
+    </div>
+    <div class="mini-card mini-card--4">
+      <!-- SUBSTITUIR: foto chapéu/acessório crochê 600×400px -->
+      <div class="mini-card-inner">
+        <span class="mini-cat">Encomenda especial</span>
+        <p class="mini-name">Peça personalizada</p>
+        <a href="https://wa.me/55[NUMERO]?text=Oi!+Quero+fazer+uma+encomenda+especial+na+BERUD!+🧶" target="_blank" rel="noopener" class="mini-link">Encomendar essa</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIFERENCIAIS ────────────────────────────────────── -->
+<section class="section section--dark" id="diferenciais">
+  <div class="crochet-overlay crochet-overlay--light"></div>
+  <div class="dif-grid">
+    <div class="dif-item">
+      <h3 class="dif-title">Feito à mão,<br><span>sob encomenda</span></h3>
+      <p class="dif-body">Nada aqui é de prateleira. Cada peça começa quando você escolhe — e termina quando fica perfeita pra você.</p>
+    </div>
+    <div class="dif-item">
+      <h3 class="dif-title">A cor<br><span>que você quiser</span></h3>
+      <p class="dif-body">Fio, cor, tamanho — você decide. A gente faz do seu jeito, porque não existe uma receita certa.</p>
+    </div>
+    <div class="dif-item">
+      <h3 class="dif-title">Enviamos<br><span>pra todo o Brasil</span></h3>
+      <p class="dif-body">Da oficina até a sua porta — com cuidado, embalado com carinho e pronto pra ir com você pra praia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEPOIMENTOS ─────────────────────────────────────── -->
+<section class="section" id="depoimentos">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="t-label">Quem já pediu</span>
+    </div>
+    <h2 class="t-section-title">O que dizem</h2>
+  </div>
+  <div class="dep-grid">
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">O biquíni chegou melhor do que nas fotos. A cor é perfeita, o acabamento é incrível e o tamanho encaixou certinho. Todo mundo na praia veio perguntar onde eu tinha comprado.</p>
+      <div class="dep-meta">
+        <span class="dep-name">Ana C.</span>
+        <span class="dep-loc">São Paulo, SP</span>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">Minha saída de praia de crochê virou o look mais comentado do verão. Pedi em verde sage e ficou exatamente como eu imaginei. Já encomendei mais duas peças!</p>
+      <div class="dep-meta">
+        <span class="dep-name">Julia M.</span>
+        <span class="dep-loc">Rio de Janeiro, RJ</span>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">Pedi personalizado, ela me atendeu em menos de 1h e em 10 dias a peça estava aqui. Qualidade artesanal de verdade — dá pra sentir o cuidado em cada ponto.</p>
+      <div class="dep-meta">
+        <span class="dep-name">Mariana T.</span>
+        <span class="dep-loc">Salvador, BA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div style="text-align:center;margin-top:64px;display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <p style="font-size:22px;font-weight:900;font-family:var(--font-head);letter-spacing:-0.01em;color:var(--c-primary);">Faz a sua. Escolhe a cor. Chega na praia diferente.</p>
+    <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+uma+peça+de+crochê!+🧶" target="_blank" rel="noopener" class="btn btn-coral" style="font-size:16px;padding:18px 36px;">🧶 Quero encomendar agora</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">BERUD</span>
+      <span class="footer-tagline">Handmade Collection — crochê artesanal</span>
+    </div>
+    <div class="footer-links">
+      <a href="#pecas">Peças</a>
+      <a href="#sobre">Sobre</a>
+      <a href="https://instagram.com/beruds__" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+uma+peça+de+crochê!+🧶" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 BERUD Handmade Collection. Feito com amor, ponto a ponto.</span>
+    <a href="https://instagram.com/beruds__" target="_blank" rel="noopener" class="footer-ig">@beruds__</a>
+  </div>
+</footer>
+
+<script>
+// ── NAV SCROLL ─────────────────────────────────────────
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── MOBILE NAV ─────────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+const navClose = document.getElementById('nav-close');
+
+hamburger.addEventListener('click', () => {
+  mobileNav.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+
+function closeMobileNav() {
+  mobileNav.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+navClose.addEventListener('click', closeMobileNav);
+mobileNav.addEventListener('click', (e) => {
+  if (e.target === mobileNav) closeMobileNav();
+});
+
+// ── SCROLL REVEAL ───────────────────────────────────────
+const revealEls = document.querySelectorAll('.product-card, .mini-card, .dep-card, .dif-item, .sobre-visual');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = el.target.style.transform?.replace('translateY(24px)', '') || '';
+      io.unobserve(el.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  el.style.transform = 'translateY(24px)';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
