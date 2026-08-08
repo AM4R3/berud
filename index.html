@@ -168,28 +168,160 @@ nav:not(.scrolled) .nav-links a { color: var(--c-primary); }
   position: relative; z-index: 2;
   display: flex; flex-direction: column; justify-content: center;
   padding: 140px 48px 80px 48px;
-  gap: 24px;
 }
-.hero-headline { display: flex; flex-direction: column; gap: 4px; }
-.hero-sub {
-  max-width: 400px;
-  font-size: 16px; font-weight: 300; color: var(--c-muted); line-height: 1.65;
-}
-.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 
-.hero-visual {
-  position: relative;
-  /* SUBSTITUIR: foto editorial produto em uso (praia/areia) 1920×1080px */
-  background: linear-gradient(160deg, #C4886A 0%, #D4956A 35%, #E8C49A 65%, #F5E0C8 100%);
-  min-height: 100vh;
+/* CAMADA 1 — badge de entrada */
+.hero-entry-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(28,20,16,.07);
+  border: 1px solid rgba(28,20,16,.14);
+  color: var(--c-muted); padding: 8px 16px; border-radius: 100px;
+  font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
+  margin-bottom: 24px; width: fit-content;
+  animation: badge-in .5s ease both;
 }
-.hero-badge {
-  position: absolute; bottom: 48px; left: -24px; z-index: 3;
-  background: var(--c-bg); color: var(--c-primary);
-  padding: 12px 20px; border-radius: 100px;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
-  box-shadow: 0 8px 32px rgba(28,20,16,0.12);
-  display: flex; align-items: center; gap: 8px;
+.badge-pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--c-cta); flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:.5; transform:scale(1.6); }
+}
+@keyframes badge-in {
+  from { opacity:0; transform:translateY(-12px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes h-in {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* CAMADA 2 — headline dopaminérgica */
+.hero-h {
+  font-family: var(--font-head);
+  line-height: 1.04; letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+.h-heavy {
+  display: block;
+  font-size: clamp(52px, 7.5vw, 96px);
+  font-weight: 900; color: var(--c-primary);
+  animation: h-in .65s ease both .1s;
+}
+.h-light {
+  display: block;
+  font-size: clamp(22px, 2.8vw, 38px);
+  font-weight: 300; font-style: italic;
+  color: var(--c-secondary);
+  animation: h-in .65s ease both .22s;
+}
+
+/* CAMADA 3 — sub */
+.hero-sub {
+  max-width: 420px;
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 300; color: rgba(28,20,16,.68); line-height: 1.65;
+  margin-bottom: 8px;
+  animation: h-in .65s ease both .34s;
+}
+
+/* CAMADA 4 — CTAs */
+.hero-ctas {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  animation: h-in .65s ease both .46s;
+}
+
+/* CAMADA 5 — prova social */
+.hero-proof {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 24px;
+  animation: h-in .65s ease both .58s;
+}
+.proof-avatars { display: flex; }
+.av {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--c-bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: white;
+  margin-left: -8px;
+}
+.av:first-child { margin-left: 0; }
+.proof-text { font-size: 13px; color: rgba(28,20,16,.55); }
+
+/* ZONA VISUAL */
+.hero-visual {
+  position: relative; min-height: 100vh; overflow: hidden;
+}
+
+/* orbs de profundidade */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(60px); pointer-events: none;
+  animation: orb-float 9s ease-in-out infinite;
+}
+.orb-1 { width: 280px; height: 280px; background: rgba(196,136,106,.35); top: -60px; right: -80px; animation-delay: 0s; }
+.orb-2 { width: 200px; height: 200px; background: rgba(212,115,94,.25); bottom: 60px; left: -40px; animation-delay: -3s; }
+.orb-3 { width: 160px; height: 160px; background: rgba(240,232,220,.4); top: 50%; right: 20%; animation-delay: -6s; }
+@keyframes orb-float {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-24px) scale(1.04); }
+}
+
+/* badge flutuante sobre o visual */
+.visual-float-badge {
+  position: absolute; bottom: 28px; left: 28px; z-index: 3;
+  background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
+  border-radius: 12px; padding: 14px 18px;
+  box-shadow: 0 8px 32px rgba(28,20,16,.14);
+  display: flex; align-items: center; gap: 10px;
+  animation: badge-float 4s ease-in-out infinite;
+}
+.vfb-icon { font-size: 20px; line-height: 1; }
+.vfb-text { display: flex; flex-direction: column; gap: 1px; }
+.vfb-label { font-size: 11px; font-weight: 500; letter-spacing: .06em; color: var(--c-muted); text-transform: uppercase; }
+.vfb-val { font-size: 14px; font-weight: 600; color: var(--c-primary); }
+@keyframes badge-float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* transição duna hero → seção seguinte */
+.hero-exit {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+  background: var(--c-bg);
+  clip-path: ellipse(54% 100% at 50% 100%);
+  z-index: 4;
+}
+
+/* scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 88px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(28,20,16,.32); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase;
+  animation: scroll-bounce 2.2s ease-in-out infinite;
+  pointer-events: none; z-index: 5;
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, rgba(28,20,16,.32), transparent);
+}
+@keyframes scroll-bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+@media (max-width: 768px) { .hero-scroll { display: none; } }
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .badge-pulse, .orb, .visual-float-badge,
+  .hero-entry-badge, .h-heavy, .h-light,
+  .hero-sub, .hero-ctas, .hero-proof, .hero-scroll {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
 }
 
 /* ── SECTION WRAPPER ──────────────────────────────────── */
@@ -446,10 +578,13 @@ footer {
   nav { padding: 18px 20px; }
   nav.scrolled { padding: 14px 20px; }
 
-  #hero { grid-template-columns: 1fr; min-height: auto; }
+  #hero { grid-template-columns: 1fr; min-height: 100svh; }
   .hero-text { padding: 90px 20px 36px; }
   .hero-visual { min-height: 70vw; }
-  .hero-badge { left: 20px; bottom: 20px; }
+  .visual-float-badge { bottom: 20px; left: 20px; }
+  .hero-exit { display: none; }
+  .orb-1 { width: 180px; height: 180px; }
+  .orb-2 { width: 140px; height: 140px; }
 
   .section { padding: 60px 20px; }
 
@@ -477,12 +612,19 @@ footer {
 @media (max-width: 480px) {
   nav { padding: 16px 20px; }
 
-  .hero-text { padding: 80px 20px 28px; gap: 18px; }
+  .hero-text { padding: 76px 20px 28px; }
   .hero-visual { min-height: 85vw; }
-  .hero-badge { font-size: 12px; padding: 10px 16px; }
-  .hero-sub { font-size: 15px; }
+  .hero-entry-badge { font-size: 11px; padding: 7px 14px; margin-bottom: 18px; }
+  .h-heavy { font-size: clamp(40px, 10vw, 56px); }
+  .h-light { font-size: clamp(18px, 4.5vw, 24px); }
+  .hero-sub { font-size: 15px; margin-bottom: 0; }
   .hero-ctas { flex-direction: column; gap: 10px; }
   .hero-ctas .btn { width: 100%; justify-content: center; text-align: center; }
+  .hero-proof { margin-top: 16px; }
+  .proof-text { font-size: 12px; }
+  .visual-float-badge { padding: 10px 14px; bottom: 16px; left: 16px; }
+  .vfb-label { font-size: 10px; }
+  .vfb-val { font-size: 13px; }
 
   .section { padding: 52px 20px; }
   .section-header { margin-bottom: 36px; }
@@ -560,20 +702,55 @@ footer {
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
   <div class="hero-text">
-    <div class="hero-headline">
-      <span class="t-hero-bold">Aquela peça</span>
-      <span class="t-hero-light">que todo mundo para pra perguntar.</span>
+    <!-- CAMADA 1: badge de entrada -->
+    <div class="hero-entry-badge">
+      <span class="badge-pulse"></span>
+      ✦ peças únicas · entrega para todo o Brasil
     </div>
+    <!-- CAMADA 2: headline dopaminérgica -->
+    <h1 class="hero-h">
+      <span class="h-heavy">Aquela peça</span>
+      <span class="h-light">que todo mundo para pra perguntar.</span>
+    </h1>
+    <!-- CAMADA 3: subheadline -->
     <p class="hero-sub">Crochê artesanal feito à mão — sem igual, do jeito que você quer.</p>
+    <!-- CAMADA 4: CTAs -->
     <div class="hero-ctas">
       <a href="https://wa.me/55[NUMERO]?text=Oi!+Vi+o+site+da+BERUD+e+quero+encomendar+uma+peça!+Pode+me+passar+as+opções?+🧶" target="_blank" rel="noopener" class="btn btn-coral" aria-label="Quero a minha peça — falar com BERUD via WhatsApp">🧶 Quero a minha peça</a>
       <a href="#pecas" class="btn btn-ghost" aria-label="Ver as peças da BERUD">Ver as peças</a>
     </div>
+    <!-- CAMADA 5: prova social inline -->
+    <div class="hero-proof">
+      <div class="proof-avatars">
+        <div class="av" style="background:#D4735E">A</div>
+        <div class="av" style="background:#C4886A">M</div>
+        <div class="av" style="background:#1C1410">J</div>
+      </div>
+      <span class="proof-text">+60 clientes encantadas com suas peças</span>
+    </div>
   </div>
+  <!-- ZONA VISUAL -->
   <div class="hero-visual" style="background:none;">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
     <img src="img/berud_modelo.jpg" alt="Modelo BERUD crochê" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;">
     <div class="crochet-overlay"></div>
-    <div class="hero-badge">🧶 feito à mão</div>
+    <!-- badge flutuante animado -->
+    <div class="visual-float-badge">
+      <span class="vfb-icon">🧶</span>
+      <div class="vfb-text">
+        <span class="vfb-label">Feito à mão</span>
+        <span class="vfb-val">sob encomenda</span>
+      </div>
+    </div>
+  </div>
+  <!-- transição duna -->
+  <div class="hero-exit" aria-hidden="true"></div>
+  <!-- scroll indicator -->
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
   </div>
 </section>
 
@@ -778,10 +955,17 @@ footer {
 </a>
 
 <script>
-// ── NAV SCROLL ─────────────────────────────────────────
+// ── NAV SCROLL + PARALLAX ──────────────────────────────
 const nav = document.getElementById('main-nav');
+const heroVisual = document.querySelector('.hero-visual');
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 60);
+  if (!prefersReduced && heroVisual && window.innerWidth > 1024) {
+    heroVisual.style.transform = `translateY(${y * 0.08}px)`;
+  }
 }, { passive: true });
 
 // ── MOBILE NAV ─────────────────────────────────────────
